@@ -1,4 +1,4 @@
-package org.example;
+package org.project;
 
 public abstract class Character implements Drawable{
   @Override

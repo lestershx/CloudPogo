@@ -1,4 +1,4 @@
-package org.example;
+package org.project;
 
 public interface Drawable {
   public void draw();

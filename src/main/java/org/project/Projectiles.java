@@ -1,6 +1,6 @@
-package org.example;
+package org.project;
 
-public class Environment implements Drawable{
+public class Projectiles implements Drawable {
   @Override
   public void draw() {
 
