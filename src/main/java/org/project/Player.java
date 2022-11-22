@@ -6,18 +6,18 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Player extends AbstractObservable{
-  private float width = 10;
-  private float height = 20;
+  private float width = 10f;
+  private float height = 20f;
   private static Player instance;
   private final Color color = new Color(0xF3A245);
 
   private PlayerDeathEventListener dListener;
 
   private Player(Window window) {
-    position = new PVector(0 + width, window.height - height);
     this.window = window;
-    direction = 0;
-    velocity = 10;
+    position = new PVector(0 + width, window.height - height);
+    direction = new PVector(1f,0f).normalize();
+    velocity = 1f;
     observers = new ArrayList<>();
   }
 
@@ -36,17 +36,17 @@ public class Player extends AbstractObservable{
 
   @Override
   public void move() {
-
+    this.position = this.position.add(this.direction.mult(this.velocity));
   }
 
   @Override
   public void registerObserver(AbstractObserver observer) {
-
+    observers.add(observer);
   }
 
   @Override
   public void unregisterObserver(AbstractObserver observer) {
-
+    observers.remove(observer);
   }
 
   @Override
