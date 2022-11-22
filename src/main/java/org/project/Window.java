@@ -54,7 +54,7 @@ public class Window extends PApplet{
         e.draw();
         e.move();
       }
-      player.move();
+//      player.move();
 //    walker.move();
       if (randomizer.nextInt(50) % 50 == 0) {
         spawnEnemy();
@@ -98,6 +98,15 @@ public class Window extends PApplet{
       case ENTER:
         gameState = 0;
         player.playerDeath();
+        break;
+      case RIGHT:
+        player.setDirection(0);
+        break;
+      case LEFT:
+        player.setDirection(1);
+        break;
+      case UP:
+        player.setDirection(2);
         break;
 //        default:
 //          break;

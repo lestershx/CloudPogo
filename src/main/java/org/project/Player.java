@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class Player extends AbstractObservable{
   private float width = 10f;
   private float height = 20f;
+
+  private float jumpHeight = 200;
   private static Player instance;
   private final Color color = new Color(0xF3A245);
 
@@ -46,6 +48,40 @@ public class Player extends AbstractObservable{
   @Override
   public void move() {
     this.position = this.position.add(this.direction.mult(this.velocity));
+    if (outOfBounds()) {
+      this.direction = new PVector(0f, 0f);
+    }
+  }
+
+//  public void jump() {
+//    while (!(position.y < window.height - height - jumpHeight)) {
+//      this.direction = new PVector(0f,-1.005f).normalize();
+//    }
+//  }
+
+  public void setDirection(int direction) {
+    switch (direction) {
+      case 0:
+        this.direction = new PVector(1f,0f).normalize();
+        break;
+      case 1:
+        this.direction = new PVector(-1f,0f).normalize();
+        break;
+      case 2:
+        this.direction = new PVector(0f,-1.005f).normalize();
+        break;
+    }
+  }
+
+  private boolean outOfBounds() {
+    if ((this.position.x > window.width
+        || this.position.x < 0)
+        || (this.position.y > window.height
+        || this.position.y <= 0)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @Override
