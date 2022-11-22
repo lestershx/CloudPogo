@@ -1,13 +1,18 @@
 package org.project;
 
 import processing.core.PApplet;
+import processing.core.PVector;
 import processing.event.KeyEvent;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Window extends PApplet{
   private Player player;
+  private Walkers walker;
   private ArrayList<Enemy> enemies;
+
+  private Random randomizer = new Random();
 
   /**
    * Sets the size of the applet window.
@@ -18,11 +23,30 @@ public class Window extends PApplet{
 
   public void setup() {
     player = Player.getInstance(this);
+    enemies = new ArrayList<>();
+    float enemyStartX = random(width / 2f, width);
+    walker = new Walkers(enemyStartX, this);
+    enemies.add(walker);
+  }
+
+  private void spawnEnemy() {
+    walker = new Walkers(width, this);
+    enemies.add(walker);
   }
 
   public void draw() {
-    player.draw();
     background(0);
+    player.draw();
+    player.move();
+    for (Enemy e: enemies) {
+      e.draw();
+      e.move();
+    }
+    player.move();
+//    walker.move();
+    if (randomizer.nextInt(50) % 50 == 0) {
+      spawnEnemy();
+    }
   }
 
   /**
