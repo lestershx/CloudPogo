@@ -11,6 +11,8 @@ public class Player extends AbstractObservable{
   private static Player instance;
   private final Color color = new Color(0xF3A245);
 
+  private PlayerDeathEventListener dListener;
+
   private Player(Window window) {
     position = new PVector(0 + width, window.height - height);
     this.window = window;

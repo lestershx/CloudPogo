@@ -5,9 +5,17 @@ import processing.event.KeyEvent;
 
 import java.util.ArrayList;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 public class Window extends PApplet{
   private Player player;
   private ArrayList<Enemy> enemies;
+  private SocketClientSync connection;
 
   /**
    * Sets the size of the applet window.
@@ -18,6 +26,7 @@ public class Window extends PApplet{
 
   public void setup() {
     player = Player.getInstance(this);
+    connection = new SocketClientSync();
   }
 
   public void draw() {
@@ -34,7 +43,7 @@ public class Window extends PApplet{
 //    if (player == null) {
 //      return;
 //    } else {
-//      switch (key.getKeyCode()) {
+      switch (key.getKeyCode()) {
 //        case RIGHT:
 //          player.setDirection(0);
 //          player.move();
@@ -53,10 +62,22 @@ public class Window extends PApplet{
 //
 //          player.move();
 //          break;
+        case ENTER:
+          System.out.println("server connection test");
+          try{
+            connection.contactServer("hello");
+          }catch(IOException | InterruptedException | ClassNotFoundException e){
+            System.out.println(e);
+          }
+          break;
 //        default:
 //          break;
-//      }
+      }
 //    }
+  }
+
+  SocketClientSync getConnection () {
+    return connection;
   }
 
   /**

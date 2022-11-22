@@ -36,14 +36,14 @@ public class SocketServer {
       // convert ObjectInputStream object to String
       String message = (String) ois.readObject();
       System.out.println("Message Received Serverside: " + message);
-      int total = Integer.parseInt(message);
+//      int total = Integer.parseInt(message);
 
 
       // create ObjectOutputStream object
       ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
       // write object to Socket
-      oos.writeObject("Hi Client "+total);
+      oos.writeObject("Server Response: "+message);
 
       // close resources
       ois.close();
