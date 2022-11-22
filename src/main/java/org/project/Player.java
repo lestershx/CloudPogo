@@ -11,7 +11,7 @@ public class Player extends AbstractObservable{
   private static Player instance;
   private final Color color = new Color(0xF3A245);
 
-  private PlayerDeathEventListener dListener;
+  private PlayerDeathEventListener deathListener;
 
   private Player(Window window) {
     this.window = window;
@@ -19,6 +19,15 @@ public class Player extends AbstractObservable{
     direction = new PVector(1f,0f).normalize();
     velocity = 1f;
     observers = new ArrayList<>();
+  }
+
+  public void registerDeathListener(PlayerDeathEventListener dlistener) {
+    deathListener = dlistener;
+  }
+
+  public void playerDeath() {
+    System.out.println("GAME OVER BRO");
+    deathListener.onEvent();
   }
 
   public static Player getInstance(Window window) {

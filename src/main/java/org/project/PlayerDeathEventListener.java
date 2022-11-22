@@ -6,17 +6,6 @@ interface OnEventListener {
   void onEvent();
 }
 
-class B {
-  private OnEventListener dListener;
-
-  public void registerOnDeathListener(OnEventListener dListener) {
-    this.dListener = dListener;
-  }
-
-
-}
-
-
 public class PlayerDeathEventListener implements OnEventListener {
 
   private Window window;
@@ -28,9 +17,9 @@ public class PlayerDeathEventListener implements OnEventListener {
   @Override
   public void onEvent() {
     System.out.println("Performing callback after synchromous task");
-    System.out.println("Game Over Bro");
+    System.out.println("Server test: input is " + window.score);
     try{
-      window.getConnection().contactServer("TEST");
+      window.getConnection().contactServer("" + window.score);
     }catch(IOException | InterruptedException | ClassNotFoundException e){
       System.out.println(e);
     }

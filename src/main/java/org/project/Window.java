@@ -1,26 +1,23 @@
 package org.project;
 
-import processing.core.PApplet;
-import processing.core.PVector;
 import processing.event.KeyEvent;
-
+import processing.core.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class Window extends PApplet{
   private Player player;
   private Walkers walker;
   private ArrayList<Enemy> enemies;
+
+  private int gameState;
   private SocketClientSync connection;
 
   private Random randomizer = new Random();
+
+  private PFont f;
+  public int score;
 
   /**
    * Sets the size of the applet window.
@@ -31,11 +28,15 @@ public class Window extends PApplet{
 
   public void setup() {
     player = Player.getInstance(this);
+    player.registerDeathListener(new PlayerDeathEventListener(this));
     connection = new SocketClientSync();
     enemies = new ArrayList<>();
     float enemyStartX = random(width / 2f, width);
     walker = new Walkers(enemyStartX, this);
     enemies.add(walker);
+    gameState = 1;
+    f = createFont("Arial",16,true);
+    score = 0;
   }
 
   private void spawnEnemy() {
@@ -44,19 +45,26 @@ public class Window extends PApplet{
   }
 
   public void draw() {
-    player.draw();
-    background(0);
-    player.draw();
-    player.move();
-    for (Enemy e: enemies) {
-      e.draw();
-      e.move();
-    }
-    player.move();
+    if(gameState == 1) {
+      player.draw();
+      background(0);
+      player.draw();
+      player.move();
+      for (Enemy e: enemies) {
+        e.draw();
+        e.move();
+      }
+      player.move();
 //    walker.move();
-    if (randomizer.nextInt(50) % 50 == 0) {
-      spawnEnemy();
+      if (randomizer.nextInt(50) % 50 == 0) {
+        spawnEnemy();
+      }
+      score++;
+      textFont(f,16);                  // STEP 3 Specify font to be used
+      fill(255);                         // STEP 4 Specify font color
+      text("Score: " + score,550,20);
     }
+
   }
 
   /**
@@ -68,7 +76,7 @@ public class Window extends PApplet{
 //    if (player == null) {
 //      return;
 //    } else {
-      switch (key.getKeyCode()) {
+    switch (key.getKeyCode()) {
 //        case RIGHT:
 //          player.setDirection(0);
 //          player.move();
@@ -87,21 +95,17 @@ public class Window extends PApplet{
 //
 //          player.move();
 //          break;
-        case ENTER:
-          System.out.println("server connection test");
-          try{
-            connection.contactServer("hello");
-          }catch(IOException | InterruptedException | ClassNotFoundException e){
-            System.out.println(e);
-          }
-          break;
+      case ENTER:
+        gameState = 0;
+        player.playerDeath();
+        break;
 //        default:
 //          break;
 //      }
 //    }
+    }
   }
-
-  SocketClientSync getConnection () {
+  SocketClientSync getConnection() {
     return connection;
   }
 
