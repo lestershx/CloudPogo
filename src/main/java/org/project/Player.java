@@ -8,8 +8,6 @@ import java.util.ArrayList;
 public class Player extends AbstractObservable{
   private float width = 10f;
   private float height = 20f;
-
-  private float jumpHeight = 200;
   private static Player instance;
   private final Color color = new Color(0xF3A245);
 
@@ -41,47 +39,52 @@ public class Player extends AbstractObservable{
 
   @Override
   public void draw() {
+    window.fill(color.getRGB());
     window.rect(position.x, position.y, width, height);
-    window.fill(color.getRGB(),100);
   }
 
   @Override
   public void move() {
     this.position = this.position.add(this.direction.mult(this.velocity));
     if (outOfBounds()) {
+      if (position.y >= window.height - height) {
+        this.position.y = window.height - height;
+      }
       this.direction = new PVector(0f, 0f);
     }
   }
 
-//  public void jump() {
-//    while (!(position.y < window.height - height - jumpHeight)) {
-//      this.direction = new PVector(0f,-1.005f).normalize();
-//    }
-//  }
+  public void jump() {
+    if (position.y >= window.height - height) {
+      this.direction.add(new PVector(0f,-7.05f));
+    }
+  }
+
+  @Override
+  public void gravity() {
+    if (position.y < window.height - height) {
+      this.direction = direction.add(new PVector(0f,0.5f));
+    }
+  }
 
   public void setDirection(int direction) {
     switch (direction) {
-      case 0:
-        this.direction = new PVector(1f,0f).normalize();
+      case 0: // Go left
+        this.direction.x = 1f;
         break;
-      case 1:
-        this.direction = new PVector(-1f,0f).normalize();
+      case 1: // Go right
+        this.direction.x = -1f;
         break;
-      case 2:
-        this.direction = new PVector(0f,-1.005f).normalize();
-        break;
+      case 2: //Stay Put
+        this.direction.x = 0f;
     }
   }
 
   private boolean outOfBounds() {
-    if ((this.position.x > window.width
+    return (this.position.x >= window.width - width
         || this.position.x < 0)
-        || (this.position.y > window.height
-        || this.position.y <= 0)) {
-      return true;
-    } else {
-      return false;
-    }
+        || (this.position.y > window.height - height
+        || this.position.y <= 0);
   }
 
   @Override
