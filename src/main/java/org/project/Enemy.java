@@ -1,6 +1,6 @@
 package org.project;
 
-public class Enemy extends Character{
+public class Enemy extends AbstractObserver{
   @Override
   public void draw() {
 
@@ -8,6 +8,11 @@ public class Enemy extends Character{
 
   @Override
   public void move() {
+
+  }
+
+  @Override
+  public void update() {
 
   }
 }
