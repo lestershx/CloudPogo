@@ -1,13 +1,14 @@
 package org.project;
 
+import processing.core.PVector;
+
 public abstract class Character implements Drawable{
-  @Override
-  public void draw() {
+  private PVector position;
+  private PVector direction;
+  private float size;
+  private Window window;
 
-  }
-
-  @Override
-  public void move() {
-
+  public Character() {
+    
   }
 }
