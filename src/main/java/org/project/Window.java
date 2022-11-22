@@ -10,12 +10,9 @@ public class Window extends PApplet{
   private Player player;
   private Walkers walker;
   private ArrayList<Enemy> enemies;
-
   private int gameState;
-  private SocketClientSync connection;
-
+  public MongoConnection connection;
   private Random randomizer = new Random();
-
   private PFont f;
   public int score;
 
@@ -29,7 +26,7 @@ public class Window extends PApplet{
   public void setup() {
     player = Player.getInstance(this);
     player.registerDeathListener(new PlayerDeathEventListener(this));
-    connection = new SocketClientSync();
+    connection = new MongoConnection();
     enemies = new ArrayList<>();
     float enemyStartX = random(width / 2f, width);
     walker = new Walkers(enemyStartX, this);
@@ -96,8 +93,7 @@ public class Window extends PApplet{
 //          player.move();
 //          break;
       case ENTER:
-        gameState = 0;
-        player.playerDeath();
+        endGame();
         break;
       case RIGHT:
         player.setDirection(0);
@@ -114,9 +110,13 @@ public class Window extends PApplet{
 //    }
     }
   }
-  SocketClientSync getConnection() {
-    return connection;
+
+  public void endGame() {
+    gameState = 0;
+    player.playerDeath();
+    connection.connect(this.score);
   }
+
 
   /**
    * Main function.
