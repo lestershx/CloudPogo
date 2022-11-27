@@ -16,4 +16,9 @@ public class Walkers extends Enemy{
     window.fill(color.getRGB());
     super.draw();
   }
+
+  @Override
+  public void update(PVector position) {
+
+  }
 }

@@ -9,4 +9,12 @@ public abstract class Character implements Drawable{
   protected Window window;
 
   public abstract void gravity();
+
+  public PVector getPosition() {
+    return position;
+  }
+
+  public PVector getDirection() {
+    return direction;
+  }
 }

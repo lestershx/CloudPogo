@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class Window extends PApplet{
   private Player player;
-  private Walkers walker;
   private ArrayList<Enemy> enemies;
+  private ArrayList<Character> characters;
   private int enemyTimer;
   private int gameState;
   public MongoConnection connection;
@@ -25,33 +25,51 @@ public class Window extends PApplet{
   }
 
   public void setup() {
+    characters = new ArrayList<>();
     player = Player.getInstance(this);
+    characters.add(player);
     player.registerDeathListener(new PlayerDeathEventListener(this));
     connection = new MongoConnection();
     enemyTimer = 0;
-    enemies = new ArrayList<>();
+//    enemies = new ArrayList<>();
     gameState = 1;
     f = createFont("Arial",16,true);
     score = 0;
   }
 
   private void spawnEnemy() {
-    walker = new Walkers(this);
-    enemies.add(walker);
+    int randomEnemy = randomizer.nextInt();
+    if (randomEnemy % 2 == 0) {
+      Walkers walker = new Walkers(this);
+      characters.add(walker);
+//      enemies.add(walker);
+      player.registerObserver(walker);
+    } else if (randomEnemy % 3 == 0) {
+      Jumpers jumper = new Jumpers(this);
+      characters.add(jumper);
+//      enemies.add(jumper);
+      player.registerObserver(jumper);
+    }
   }
 
   public void draw() {
     if(gameState == 1) {
-      player.draw();
+//      player.draw();
       background(0);
-      player.draw();
-      player.move();
-      for (Enemy e: enemies) {
-        e.draw();
-        e.move();
+//      player.draw();
+//      player.move();
+      player.notifyObservers();
+//      for (Enemy e: enemies) {
+//        e.draw();
+//        e.move();
+//      }
+      for (Character c : characters) {
+        c.draw();
+        c.move();
+        c.gravity();
       }
-      player.gravity();
-      if (enemyTimer % 100 == 0) {
+//      player.gravity();
+      if (enemyTimer % 80 == 0) {
         spawnEnemy();
       }
       enemyTimer++;

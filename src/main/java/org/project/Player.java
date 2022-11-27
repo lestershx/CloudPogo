@@ -6,11 +6,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Player extends AbstractObservable{
-  private float width = 10f;
-  private float height = 20f;
   private static Player instance;
+  private final float width = 10f;
+  private final float height = 20f;
   private final Color color = new Color(0xF3A245);
-
+  private final float broadcastRange = 150f;
   private PlayerDeathEventListener deathListener;
 
   private Player(Window window) {
@@ -99,6 +99,13 @@ public class Player extends AbstractObservable{
 
   @Override
   public void notifyObservers() {
-
+    for(AbstractObserver o : observers) {
+      if (o.getPosition().x < position.x + broadcastRange
+          && o.getPosition().x > position.x - broadcastRange
+          && o.getPosition().y < position.y + broadcastRange
+          && o.getPosition().y > position.y - broadcastRange) {
+        o.update(this.position);
+      }
+    }
   }
 }

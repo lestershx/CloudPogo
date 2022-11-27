@@ -2,8 +2,8 @@ package org.project;
 
 import processing.core.PVector;
 
-public class Enemy extends AbstractObserver{
-  private float size = 10;
+public abstract class Enemy extends AbstractObserver{
+  protected float size = 10;
   public Enemy(Window window) {
     this.window = window;
     this.position = new PVector(window.width, window.height - size);
@@ -18,15 +18,18 @@ public class Enemy extends AbstractObserver{
   @Override
   public void move() {
     this.position = this.position.add(this.direction.mult(this.velocity));
+    if (position.y >= window.height - size) {
+      this.position.y = window.height - size;
+    }
   }
 
   @Override
-  public void update() {
-
-  }
+  public abstract void update(PVector position);
 
   @Override
   public void gravity() {
-
+    if (position.y < window.height - size) {
+      this.direction = direction.add(new PVector(0f,0.5f));
+    }
   }
 }
