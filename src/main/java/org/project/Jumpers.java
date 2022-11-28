@@ -20,13 +20,13 @@ public class Jumpers extends Enemy{
   }
 
   public void jump() {
-    if (position.y >= window.height - size) {
+    if (position.y >= window.height - height/2) {
       this.direction.add(new PVector(0f,-5.50f));
     }
   }
 
-  @Override
-  public void update(PVector position) {
-    jump();
-  }
+//  @Override
+//  public void update(PVector position) {
+//    jump();
+//  }
 }

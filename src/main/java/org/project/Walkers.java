@@ -17,8 +17,10 @@ public class Walkers extends Enemy{
     super.draw();
   }
 
-  @Override
-  public void update(PVector position) {
-
-  }
+//  @Override
+//  public void update(PVector position) {
+//
+//
+//
+//  }
 }

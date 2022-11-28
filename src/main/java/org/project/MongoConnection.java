@@ -21,8 +21,10 @@ import static com.mongodb.client.model.Filters.eq;
 public class MongoConnection {
 
   MongoConnection singleConnection = null;
+  Window window;
 
-  public MongoConnection () {
+  public MongoConnection (Window win) {
+    window = win;
   }
 
   void connect (int score) {
@@ -54,7 +56,7 @@ public class MongoConnection {
     // find document
     collection.find()
         // subscribe takes a class that defines the callback
-        .subscribe(new SubscriberHelpers.PrintDocumentSubscriber());
+        .subscribe(new SubscriberHelpers.PrintDocumentSubscriber(this.window));
 
     // TODO: I strongly suggest saving local copies of your BSON/JSON data.
     // Since this is a shared login, there is no guarantee that someone will not

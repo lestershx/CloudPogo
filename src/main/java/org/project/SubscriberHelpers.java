@@ -22,6 +22,7 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -155,10 +156,28 @@ public final class SubscriberHelpers {
    */
   public static class PrintDocumentSubscriber extends OperationSubscriber<Document> {
 
+    Window window;
+
+    public PrintDocumentSubscriber (Window win) {
+      window = win;
+    }
+
     @Override
     public void onNext(final Document document) {
       super.onNext(document);
-      System.out.println(document.toJson());
+//      System.out.println(document.toJson());
+      String results = document.toJson();
+
+      String[] newStringArr = results.split("\\D+[0-9a-z]+\\D+\"gameScore\": \"");
+
+      for(int i = 0; i < newStringArr.length; i++) {
+        newStringArr[i] = newStringArr[i].replaceAll("[\\D\\n]+", "");
+        if(newStringArr[i].length() > 0) {
+          Integer newInt = Integer.parseInt(newStringArr[i]);
+          window.addScoreToList(newInt);
+        }
+      }
+      window.sortScoreList();
     }
   }
 

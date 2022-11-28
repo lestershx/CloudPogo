@@ -7,8 +7,8 @@ public class Shooters extends Enemy{
     super(window);
   }
 
-  @Override
-  public void update(PVector position) {
-
-  }
+//  @Override
+//  public void update(PVector position) {
+//
+//  }
 }
