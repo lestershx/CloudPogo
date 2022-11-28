@@ -38,17 +38,21 @@ public class Window extends PApplet{
   }
 
   private void spawnEnemy() {
-    int randomEnemy = randomizer.nextInt();
-    if (randomEnemy % 2 == 0) {
+    int enemyRandomizer = randomizer.nextInt();
+    if (enemyRandomizer % 2 == 0) {
       Walkers walker = new Walkers(this);
       characters.add(walker);
 //      enemies.add(walker);
       player.registerObserver(walker);
-    } else if (randomEnemy % 3 == 0) {
+    } else if (enemyRandomizer % 3 == 0) {
       Jumpers jumper = new Jumpers(this);
       characters.add(jumper);
 //      enemies.add(jumper);
       player.registerObserver(jumper);
+    } else if (enemyRandomizer % 5 == 0) {
+      Shooters shooter = new Shooters(this);
+      characters.add(shooter);
+      player.registerObserver(shooter);
     }
   }
 

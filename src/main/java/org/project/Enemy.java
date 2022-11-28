@@ -24,7 +24,7 @@ public abstract class Enemy extends AbstractObserver{
   }
 
   @Override
-  public abstract void update(PVector position);
+  public abstract void update(PVector playerPos);
 
   @Override
   public void gravity() {

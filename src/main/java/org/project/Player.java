@@ -9,6 +9,7 @@ public class Player extends AbstractObservable{
   private static Player instance;
   private final float width = 10f;
   private final float height = 20f;
+  private final float jumpHeight = -8.05f;
   private final Color color = new Color(0xF3A245);
   private final float broadcastRange = 150f;
   private PlayerDeathEventListener deathListener;
@@ -56,7 +57,7 @@ public class Player extends AbstractObservable{
 
   public void jump() {
     if (position.y >= window.height - height) {
-      this.direction.add(new PVector(0f,-7.05f));
+      this.direction.add(new PVector(0f,jumpHeight));
     }
   }
 

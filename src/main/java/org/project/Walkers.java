@@ -18,7 +18,7 @@ public class Walkers extends Enemy{
   }
 
   @Override
-  public void update(PVector position) {
+  public void update(PVector playerPos) {
 
   }
 }
