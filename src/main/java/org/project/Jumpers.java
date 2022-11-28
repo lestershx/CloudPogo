@@ -7,7 +7,6 @@ import java.awt.*;
 public class Jumpers extends Enemy{
 
   private final Color color = new Color(0x45DFF3);
-  private final float jumpHeight = -6.50f;
 
   public Jumpers(Window window) {
     super(window);
@@ -21,13 +20,13 @@ public class Jumpers extends Enemy{
   }
 
   public void jump() {
-    if (position.y >= window.height - size) {
-      this.direction.add(new PVector(0f,jumpHeight));
+    if (position.y >= window.height - height/2) {
+      this.direction.add(new PVector(0f,-5.50f));
     }
   }
 
-  @Override
-  public void update(PVector playerPos) {
-    jump();
-  }
+//  @Override
+//  public void update(PVector position) {
+//    jump();
+//  }
 }
