@@ -1,6 +1,6 @@
 COMP 2522 Term Project
-\nBuck Sin
-\nLester Shun
+Buck Sin
+Lester Shun
 
 Sources: 
 1) Wallpaper by kaleb-silva on freepik.com
