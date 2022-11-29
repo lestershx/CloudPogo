@@ -1,15 +1,17 @@
 package org.project;
 
+import processing.core.PImage;
 import processing.core.PVector;
+import processing.core.*;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Player extends AbstractObservable{
   private static Player instance;
-  private final float width = 20f;
-  private final float height = 20f;
-
+  private final float width = 35f;
+  private final float height = 35f;
+  private PImage sprite;
   public float leftBoundaryValue;
 
   public float rightBoundaryValue;
@@ -31,6 +33,7 @@ public class Player extends AbstractObservable{
     velocity = 1f;
     observers = new ArrayList<>();
     jumpNum = 0;
+    sprite = window.loadImage("images/character_sprite.png");
   }
 
   public void registerDeathListener(PlayerDeathEventListener dlistener) {
@@ -51,8 +54,9 @@ public class Player extends AbstractObservable{
 
   @Override
   public void draw() {
-    window.fill(color.getRGB());
-    window.rect(position.x-width/2, position.y-height/2, width, height);
+//    window.fill(color.getRGB());
+//    window.rect(position.x-width/2, position.y-height/2, width, height);
+    window.image(sprite, position.x-width/2, position.y-height/2, width, height);
   }
 
   @Override

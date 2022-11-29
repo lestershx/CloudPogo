@@ -16,6 +16,7 @@ public class Window extends PApplet{
   public MongoConnection connection;
   private Random randomizer = new Random();
   private PFont f;
+  private PImage background;
   public int score;
   public float gameDifficulty;
 
@@ -27,10 +28,11 @@ public class Window extends PApplet{
    * Sets the size of the applet window.
    */
   public void settings() {
-    size(640, 640);
+    size(1249, 576);
   }
 
   public void setup() {
+    background = loadImage("images/background.png");
     characters = new ArrayList<>();
     player = Player.getInstance(this);
     player.registerDeathListener(new PlayerDeathEventListener(this));
@@ -60,13 +62,27 @@ public class Window extends PApplet{
     }
   }
 
+  /**
+   *
+   * NOTE: Side scrolling background implemented using code found on Processing forum:
+   * https://forum.processing.org/two/discussion/20079/how-can-i-make-an-endless-scrolling-background.html
+   */
   public void draw() {
+    // Side scrolling background
+    background(0);
+    image(background, 0, 0);
+    int x = frameCount % background.width;
+    copy(background, x, 0, background.width, height, 0, 0, background.width, height);
+    int x2 = background.width - x;
+    if (x2 < width) {
+      copy(background, 0, 0, background.width, height, x2, 0, background.width, height);
+    }
+
     // game intro state
     if(gameState == 0) {
-      background(0);
       player.draw();
       enemyTimer++;
-      if (enemyTimer % 100 == 0) {
+      if (enemyTimer % 150 == 0) {
         spawnEnemy(enemyTimer);
       }
       for (Character c : characters) {
@@ -82,7 +98,6 @@ public class Window extends PApplet{
     }
     // game in play state
     if(gameState == 1) {
-      background(0);
       player.notifyObservers();
       player.draw();
       player.move();

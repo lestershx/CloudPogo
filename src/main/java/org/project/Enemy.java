@@ -1,11 +1,14 @@
 package org.project;
 
+import processing.core.PImage;
 import processing.core.PVector;
 
 public abstract class Enemy extends AbstractObserver{
   protected float width;
 
   protected float height;
+
+  protected PImage cloudSprite;
 
   private float leftBoundaryValue;
 
@@ -23,11 +26,14 @@ public abstract class Enemy extends AbstractObserver{
         * (window.height - (float)Math.random() * 2 * height));
     PVector newVector = new PVector(0,window.height).sub(this.getPosition()).normalize();
     direction = newVector;
+    cloudSprite = window.loadImage("images/cloud.png");
   }
 
   @Override
   public void draw() {
-    window.rect(position.x - width/2, position.y - height/2, width, height, 8f);
+//    window.rect(position.x - width/2, position.y - height/2, width, height);
+    window.image(cloudSprite, position.x - width/2, position.y - height/2,width, height);
+//    window.rect(position.x - width/2, position.y - height/2, width, height, 8f);
   }
 
   @Override
