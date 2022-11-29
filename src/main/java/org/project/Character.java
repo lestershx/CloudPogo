@@ -2,7 +2,7 @@ package org.project;
 
 import processing.core.PVector;
 
-public abstract class Character implements Drawable, Collidable {
+public abstract class Character implements Drawable {
   protected PVector position;
   protected PVector direction;
   protected float velocity;
@@ -13,12 +13,9 @@ public abstract class Character implements Drawable, Collidable {
   protected float topBoundaryValue;
   protected float bottomBoundaryValue;
 
-  public abstract void gravity();
-
   public PVector getPosition() {
     return position;
   }
-
   public PVector getDirection() {
     return direction;
   }

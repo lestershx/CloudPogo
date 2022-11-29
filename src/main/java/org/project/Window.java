@@ -9,9 +9,8 @@ import java.util.Random;
 
 public class Window extends PApplet{
   private Player player;
-  private ArrayList<Enemy> enemies;
-  private ArrayList<Character> characters;
-  private int enemyTimer;
+  private ArrayList<Character> sprites;
+  private int cloudTimer;
   private int gameState;
   public MongoConnection connection;
   private Random randomizer = new Random();
@@ -33,12 +32,11 @@ public class Window extends PApplet{
 
   public void setup() {
     background = loadImage("images/background.png");
-    characters = new ArrayList<>();
+    sprites = new ArrayList<>();
     player = Player.getInstance(this);
     player.registerDeathListener(new PlayerDeathEventListener(this));
     connection = new MongoConnection(this);
-    enemyTimer = 0;
-//    enemies = new ArrayList<>();
+    cloudTimer = 0;
     gameState = 0;
     f = createFont("Arial",16,true);
     score = 0;
@@ -47,16 +45,16 @@ public class Window extends PApplet{
     showScore = false;
   }
 
-  private void spawnEnemy(int enemyTimer) {
+  private void spawnCloud(int enemyTimer) {
 //    int randomEnemy = randomizer.nextInt();
     if (enemyTimer % 150 != 0) {
-      Walkers walker = new Walkers(this);
-      characters.add(walker);
+      NormalCloud walker = new NormalCloud(this);
+      sprites.add(walker);
 //      enemies.add(walker);
       player.registerObserver(walker);
     } else {
-      Jumpers jumper = new Jumpers(this);
-      characters.add(jumper);
+      MovingCloud jumper = new MovingCloud(this);
+      sprites.add(jumper);
 //      enemies.add(jumper);
       player.registerObserver(jumper);
     }
@@ -81,11 +79,11 @@ public class Window extends PApplet{
     // game intro state
     if(gameState == 0) {
       player.draw();
-      enemyTimer++;
-      if (enemyTimer % 150 == 0) {
-        spawnEnemy(enemyTimer);
+      cloudTimer++;
+      if (cloudTimer % 150 == 0) {
+        spawnCloud(cloudTimer);
       }
-      for (Character c : characters) {
+      for (Character c : sprites) {
         c.draw();
         c.move();
       }
@@ -102,15 +100,15 @@ public class Window extends PApplet{
       player.draw();
       player.move();
       player.gravity();
-      for (Character c : characters) {
+      for (Character c : sprites) {
         c.draw();
         c.move();
       }
-      if (enemyTimer % 100 == 0) {
-        spawnEnemy(enemyTimer);
+      if (cloudTimer % 100 == 0) {
+        spawnCloud(cloudTimer);
       }
-      enemyTimer++;
-      if(enemyTimer % 1000 == 0) {
+      cloudTimer++;
+      if(cloudTimer % 1000 == 0) {
         if(gameDifficulty < 3) {
           gameDifficulty+=0.1;
         }
@@ -123,7 +121,7 @@ public class Window extends PApplet{
     //game in pause state
     if(gameState == -1) {
       player.draw();
-      for (Character c : characters) {
+      for (Character c : sprites) {
         c.draw();
       }
       text("Paused",width/2,height/2);
@@ -131,7 +129,7 @@ public class Window extends PApplet{
     }
     //game in end state
     if(gameState == -2) {
-      for (Character c : characters) {
+      for (Character c : sprites) {
         c.draw();
 //        c.move();
       }
@@ -166,7 +164,6 @@ public class Window extends PApplet{
     }
     switch (key.getKeyCode()) {
       case ENTER:
-//        endGame();
         if(gameState >= 0) {
           gameState = -1;
         } else if(gameState == -1){
@@ -179,19 +176,8 @@ public class Window extends PApplet{
       case LEFT:
         player.setDirection(1);
         break;
-      case ' ':
-        player.jump(0);
+      default:
         break;
-      case UP:
-        player.jump(0);
-        break;
-      case DOWN:
-        player.setDirection(2);
-        break;
-//        default:
-//          break;
-//      }
-//    }
     }
   }
 

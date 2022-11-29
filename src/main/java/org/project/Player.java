@@ -93,7 +93,6 @@ public class Player extends AbstractObservable{
     }
   }
 
-  @Override
   public void gravity() {
     if (position.y < window.height - height) {
       this.direction = direction.add(new PVector(0f,0.5f));

@@ -3,7 +3,7 @@ package org.project;
 import processing.core.PImage;
 import processing.core.PVector;
 
-public abstract class Enemy extends AbstractObserver{
+public abstract class Cloud extends AbstractObserver{
   protected float width;
 
   protected float height;
@@ -18,7 +18,7 @@ public abstract class Enemy extends AbstractObserver{
 
   private float bottomBoundaryValue;
 
-  public Enemy(Window window) {
+  public Cloud(Window window) {
     this.window = window;
     this.width = (float)Math.random() * 70 * (4-window.gameDifficulty) / 3 + 50;
     this.height = (float)Math.random() * 20 + 20;
@@ -57,13 +57,6 @@ public abstract class Enemy extends AbstractObserver{
       if(Math.abs(bottomBoundaryValue - player.bottomBoundaryValue) < height && player.direction.y > 0) {
         player.jump(1);
       }
-    }
-  };
-
-  @Override
-  public void gravity() {
-    if (position.y < window.height - height) {
-      this.direction = direction.add(new PVector(0f,0.5f));
     }
   }
 }
