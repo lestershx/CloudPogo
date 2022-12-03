@@ -45,18 +45,20 @@ public class Window extends PApplet{
     showScore = false;
   }
 
-  private void spawnCloud(int enemyTimer) {
-//    int randomEnemy = randomizer.nextInt();
-    if (enemyTimer % 150 != 0) {
-      NormalCloud walker = new NormalCloud(this);
-      sprites.add(walker);
-//      enemies.add(walker);
-      player.registerObserver(walker);
+  private void spawnCloud(int cloudTimer) {
+    int randomInt = randomizer.nextInt();
+    if (cloudTimer % 150 != 0 && randomInt % 2 == 0) {
+      UpCloud up = new UpCloud(this);
+      sprites.add(up);
+      player.registerObserver(up);
+    } else if (cloudTimer % 150 != 0 && randomInt % 2 != 0){
+      MovingCloud mCloud = new MovingCloud(this);
+      sprites.add(mCloud);
+      player.registerObserver(mCloud);
     } else {
-      MovingCloud jumper = new MovingCloud(this);
-      sprites.add(jumper);
-//      enemies.add(jumper);
-      player.registerObserver(jumper);
+      NormalCloud nCloud = new NormalCloud(this);
+      sprites.add(nCloud);
+      player.registerObserver(nCloud);
     }
   }
 
