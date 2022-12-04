@@ -36,7 +36,6 @@ public class Window extends PApplet{
     sprites = new ArrayList<>();
     removeSpriteQueue = new ArrayList<>();
     player = Player.getInstance(this);
-    player.registerDeathListener(new PlayerDeathEventListener(this));
     connection = new MongoConnection(this);
     cloudTimer = 0;
     gameState = 0;
@@ -201,7 +200,6 @@ public class Window extends PApplet{
 
   public void endGame() {
     gameState = -2;
-    player.playerDeath();
     connection.connect(this.score);
   }
 

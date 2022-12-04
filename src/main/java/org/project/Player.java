@@ -24,7 +24,6 @@ public class Player extends AbstractObservable{
 
   private final Color color = new Color(0xF3A245);
   private final float broadcastRange = 150f;
-  private PlayerDeathEventListener deathListener;
 
   private Player(Window window) {
     this.window = window;
@@ -34,15 +33,6 @@ public class Player extends AbstractObservable{
     observers = new ArrayList<>();
     jumpNum = 0;
     sprite = window.loadImage("images/character_sprite.png");
-  }
-
-  public void registerDeathListener(PlayerDeathEventListener dlistener) {
-    deathListener = dlistener;
-  }
-
-  public void playerDeath() {
-    System.out.println("GAME OVER BRO");
-    deathListener.onEvent();
   }
 
   public static Player getInstance(Window window) {
