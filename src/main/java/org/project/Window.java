@@ -154,6 +154,7 @@ public class Window extends PApplet{
       fill(255);
       text("GAME OVER BRO :(",width/2 - 100f,height/6);
       text("Your score: " + score,width/2 - 100f,height/6 + 40);
+      text("Press [SPACEBAR] to play again!",width/2f - 150f,420);
       if(showScore) {
         textFont(f, 18);
         text("Top Scores",width/2 - 50,170);
@@ -168,7 +169,6 @@ public class Window extends PApplet{
         text("9: " + scoreList.get(8),width/2 - 50,360);
         text("10:" + scoreList.get(9),width/2 - 50,380);
       }
-      text("Press [SPACEBAR] to play again!",width/2f - 100f,420);
     }
   }
 
