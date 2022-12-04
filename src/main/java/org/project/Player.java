@@ -180,7 +180,7 @@ public class Player extends AbstractObservable {
 
   /**
    * Method that resets the singleton instance.
-   * //USED FOR J-UNIT TESTING ONLY//
+   * Used to reset Player character after game over and also J-Unit testing.
    */
   public static void resetSingleton() {
     instance = null;

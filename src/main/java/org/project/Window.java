@@ -53,13 +53,13 @@ public class Window extends PApplet{
       sprites.add(up);
       player.registerObserver(up);
     } else if (cloudTimer % 150 != 0 && randomInt % 2 != 0){
-      MovingCloud mCloud = new MovingCloud(this);
-      sprites.add(mCloud);
-      player.registerObserver(mCloud);
+      Cloud cloud = new Cloud(this);
+      sprites.add(cloud);
+      player.registerObserver(cloud);
     } else {
-      NormalCloud nCloud = new NormalCloud(this);
-      sprites.add(nCloud);
-      player.registerObserver(nCloud);
+      Cloud cloud = new Cloud(this);
+      sprites.add(cloud);
+      player.registerObserver(cloud);
     }
   }
 

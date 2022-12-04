@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests the methods of Player class
  * NOTE: Before testing, comment out lines 18, 31 and 53 in Player,
- * and lines 11, 32 and 46 in Cloud as PImage interferes with testing.
+ * and lines 17, 41, 59 and 60 in Cloud as PImage interferes with testing.
  */
 class PlayerTest {
   Window window;
@@ -96,24 +96,24 @@ class PlayerTest {
 
   @Test
   void testAddObserver() {
-    NormalCloud nCloud1 = new NormalCloud(window);
-    player.registerObserver(nCloud1);
+    Cloud cloud1 = new Cloud(window);
+    player.registerObserver(cloud1);
     assertEquals(1, player.observers.size());
-    NormalCloud nCloud2 = new NormalCloud(window);
-    player.registerObserver(nCloud2);
+    Cloud cloud2 = new Cloud(window);
+    player.registerObserver(cloud2);
     assertEquals(2, player.observers.size());
   }
 
   @Test
   void testRemoveObserver() {
-    NormalCloud nCloud1 = new NormalCloud(window);
-    player.registerObserver(nCloud1);
-    NormalCloud nCloud2 = new NormalCloud(window);
-    player.registerObserver(nCloud2);
+    Cloud cloud1 = new Cloud(window);
+    player.registerObserver(cloud1);
+    Cloud cloud2 = new Cloud(window);
+    player.registerObserver(cloud2);
     assertEquals(2, player.observers.size());
-    player.unregisterObserver(nCloud1);
+    player.unregisterObserver(cloud1);
     assertEquals(1, player.observers.size());
-    player.unregisterObserver(nCloud2);
+    player.unregisterObserver(cloud2);
     assertEquals(0, player.observers.size());
   }
 }
