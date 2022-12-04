@@ -9,15 +9,6 @@ public abstract class Cloud extends AbstractObserver{
   protected float height;
 
   protected PImage cloudSprite;
-
-  private float leftBoundaryValue;
-
-  private float rightBoundaryValue;
-
-  private float topBoundaryValue;
-
-  private float bottomBoundaryValue;
-
   private float speedMultiplier;
 
   private float displacement;
@@ -34,7 +25,7 @@ public abstract class Cloud extends AbstractObserver{
     this.speedMultiplier = 1 + (float) (0.5 * window.gameDifficulty/3);
     this.position = new PVector(window.width + width/2,
         (window.height * 0.9f - (float)Math.random() * 3 * height));
-    PVector newVector = new PVector(0,window.height).sub(this.getPosition()).normalize();
+    PVector newVector = new PVector(0,window.height).sub(position).normalize();
     newVector.mult(speedMultiplier);
     this.direction = newVector;
     this.direction.x *= this.speedMultiplier;
@@ -88,7 +79,7 @@ public abstract class Cloud extends AbstractObserver{
         || (player.leftBoundaryValue > this.leftBoundaryValue
         && player.leftBoundaryValue < this.rightBoundaryValue)) {
       if(Math.abs(bottomBoundaryValue - player.bottomBoundaryValue) < height && player.direction.y > 0) {
-        player.jump(1);
+        player.jump();
         toggleBounce();
       }
     }
