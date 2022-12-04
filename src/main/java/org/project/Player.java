@@ -95,9 +95,7 @@ public class Player extends AbstractObservable {
    * Constant downward force applied to the Player.
    */
   public void gravity() {
-    if (position.y < window.height - height) {
-      this.direction = direction.add(new PVector(0f, 0.5f));
-    }
+    this.direction = direction.add(new PVector(0f, 0.5f));
   }
 
   /**
@@ -178,5 +176,13 @@ public class Player extends AbstractObservable {
         o.update(this);
       }
     }
+  }
+
+  /**
+   * Method that resets the singleton instance.
+   * //USED FOR J-UNIT TESTING ONLY//
+   */
+  public static void resetSingleton() {
+    instance = null;
   }
 }

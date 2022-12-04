@@ -71,6 +71,7 @@ public class Window extends PApplet{
     if(removeSpriteQueue.size() > 0) {
       for(Character c : removeSpriteQueue) {
         sprites.remove(c);
+        player.unregisterObserver((AbstractObserver) c);
       }
     }
   }

@@ -8,7 +8,7 @@ public abstract class Cloud extends AbstractObserver{
 
   protected float height;
 
-  protected PImage cloudSprite;
+  protected final PImage cloudSprite;
   private float speedMultiplier;
 
   private float displacement;
