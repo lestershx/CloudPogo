@@ -8,11 +8,6 @@ public abstract class Character implements Drawable {
   protected float velocity;
   protected Window window;
 
-  protected float leftBoundaryValue;
-  protected float rightBoundaryValue;
-  protected float topBoundaryValue;
-  protected float bottomBoundaryValue;
-
   public PVector getPosition() {
     return position;
   }

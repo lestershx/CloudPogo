@@ -8,7 +8,6 @@ public class UpCloud extends Cloud {
 
   public UpCloud(Window window) {
     super(window);
-    velocity = 1f;
     direction.add(0f, -0.75f);
     startingHeight = position.y;
   }

@@ -10,7 +10,6 @@ public class MovingCloud extends Cloud {
 
   public MovingCloud(Window window) {
     super(window);
-    velocity = 1.00075f;
   }
 
   @Override

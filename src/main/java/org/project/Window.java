@@ -10,6 +10,7 @@ import java.util.Random;
 public class Window extends PApplet{
   private Player player;
   private ArrayList<Character> sprites;
+  private ArrayList<Character> removeSpriteQueue;
   private int cloudTimer;
   private int gameState;
   public MongoConnection connection;
@@ -33,6 +34,7 @@ public class Window extends PApplet{
   public void setup() {
     background = loadImage("images/background.png");
     sprites = new ArrayList<>();
+    removeSpriteQueue = new ArrayList<>();
     player = Player.getInstance(this);
     player.registerDeathListener(new PlayerDeathEventListener(this));
     connection = new MongoConnection(this);
@@ -62,12 +64,26 @@ public class Window extends PApplet{
     }
   }
 
+  public void addToRemoveQueue(Character c) {
+    removeSpriteQueue.add(c);
+  }
+
+  private void removeCloud() {
+    if(removeSpriteQueue.size() > 0) {
+      for(Character c : removeSpriteQueue) {
+        sprites.remove(c);
+      }
+    }
+  }
+
   /**
    *
    * NOTE: Side scrolling background implemented using code found on Processing forum:
    * https://forum.processing.org/two/discussion/20079/how-can-i-make-an-endless-scrolling-background.html
    */
   public void draw() {
+    removeCloud();
+
     // Side scrolling background
     background(0);
     image(background, 0, 0);
@@ -91,10 +107,10 @@ public class Window extends PApplet{
       }
       textFont(f, 22);
       fill(255);
-      text("CLOUD POGO",width/2 - 160f,height/4);
-      text("By Lester and Buck",width/2 - 160f,height/4 + 30f);
-      text("Dont hit the ground,\nbounce off the clouds",width/2 - 160f,height/3 + 20f);
-      text("Press any directional\nkey to start >>",width/2 - 160f,height/3 + 82f);
+      text("CLOUD POGO",width/2 - 170f,height/5);
+      text("By Lester and Buck",width/2 - 170f,height/4 + 25f);
+      text("Dont hit the ground,\nbounce off the clouds",width/2 - 170f,height/3 + 10f);
+      text("Press any directional\nkey to start >>",width/2 - 170f,height/3 + 70f);
     }
     // game in play state
     if(gameState == 1) {
@@ -133,24 +149,24 @@ public class Window extends PApplet{
     if(gameState == -2) {
       for (Character c : sprites) {
         c.draw();
-//        c.move();
       }
       textFont(f, 24);
       fill(255);
-      text("GAME OVER BRO :(",width/2 - 100f,height/5);
+      text("GAME OVER BRO :(",width/2 - 100f,height/6);
+      text("Your score: " + score,width/2 - 100f,height/6 + 40);
       if(showScore) {
         textFont(f, 18);
         text("Top Scores",width/2 - 50,170);
-        text("1: " + scoreList.get(0),220,200);
-        text("2: " + scoreList.get(1),220,220);
-        text("3: " + scoreList.get(2),220,240);
-        text("4: " + scoreList.get(3),220,260);
-        text("5: " + scoreList.get(4),220,280);
-        text("6: " + scoreList.get(5),220,300);
-        text("7: " + scoreList.get(6),220,320);
-        text("8: " + scoreList.get(7),220,340);
-        text("9: " + scoreList.get(8),220,360);
-        text("10:" + scoreList.get(9),220,380);
+        text("1: " + scoreList.get(0),width/2 - 50,200);
+        text("2: " + scoreList.get(1),width/2 - 50,220);
+        text("3: " + scoreList.get(2),width/2 - 50,240);
+        text("4: " + scoreList.get(3),width/2 - 50,260);
+        text("5: " + scoreList.get(4),width/2 - 50,280);
+        text("6: " + scoreList.get(5),width/2 - 50,300);
+        text("7: " + scoreList.get(6),width/2 - 50,320);
+        text("8: " + scoreList.get(7),width/2 - 50,340);
+        text("9: " + scoreList.get(8),width/2 - 50,360);
+        text("10:" + scoreList.get(9),width/2 - 50,380);
       }
     }
   }
