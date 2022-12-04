@@ -168,6 +168,7 @@ public class Window extends PApplet{
         text("9: " + scoreList.get(8),width/2 - 50,360);
         text("10:" + scoreList.get(9),width/2 - 50,380);
       }
+      text("Press [SPACEBAR] to play again!",width/2f - 100f,420);
     }
   }
 
@@ -194,6 +195,11 @@ public class Window extends PApplet{
       case LEFT:
         player.setDirection(1);
         break;
+      case ' ':
+        if (gameState == -2) {
+          Player.resetSingleton();
+          setup();
+        }
       default:
         break;
     }
