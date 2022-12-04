@@ -1,7 +1,25 @@
-COMP 2522 Term Project
-Buck Sin
-Lester Shun
+# Cloud Pogo - COMP 2522 Term Project
+### By: Buck Sin and Lester Shun
 
-Sources: 
-1) Wallpaper by kaleb-silva on freepik.com
-https://www.freepik.com/premium-vector/pixel-art-night-sky-background-with-clouds-stars-game-8-bit_27462133.htm
+## Introduction:
+Cloud Pogo is a Java based side-scrolling game that uses the PApplet library. This project was made for the COMP2522
+course at BCIT.
+
+The object of the game is to control Pogo, a wandering star to keep bouncing on clouds to prevent it from falling from
+the sky. Clouds will vary from stationary clouds to turbulent clouds that float up and down. Survive as long as possible
+and try to beat the scores on the leaderboard! 
+## Controls:
+
+LEFT KEY [⇦]: Makes Pogo go left
+
+RIGHT KEY [⇨]: Makes Pogo go right
+
+SPACE BAR [ ␣ ]: Resets the game on the GAME OVER screen
+
+## Sources: 
+1) Wallpaper by <b><i>kaleb-silva</i></b> on freepik.com
+
+   https://www.freepik.com/premium-vector/pixel-art-night-sky-background-with-clouds-stars-game-8-bit_27462133.htm
+2) Side scrolling background code adapted from <b><i>koogs</i></b> on Processing forum
+
+   https://forum.processing.org/two/discussion/20079/how-can-i-make-an-endless-scrolling-background.html
