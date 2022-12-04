@@ -36,7 +36,7 @@ public class Window extends PApplet{
     sprites = new ArrayList<>();
     removeSpriteQueue = new ArrayList<>();
     player = Player.getInstance(this);
-    connection = new MongoConnection(this);
+    connection = MongoConnection.getInstance(this);
     cloudTimer = 0;
     gameState = 0;
     f = createFont("Arial",16,true);
@@ -209,7 +209,6 @@ public class Window extends PApplet{
 
   public void sortScoreList() {
     Collections.sort(this.scoreList, Collections.reverseOrder());
-    System.out.println("scores sorted");
     showScore = true;
   }
 

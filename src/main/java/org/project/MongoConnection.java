@@ -20,10 +20,16 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class MongoConnection {
 
-  MongoConnection singleConnection = null;
+  private static MongoConnection instance;
   Window window;
 
-  public MongoConnection (Window win) {
+  public static MongoConnection getInstance(Window window) {
+    if (instance == null) {
+      instance = new MongoConnection(window);
+    }
+    return instance;
+  }
+  private MongoConnection (Window win) {
     window = win;
   }
 
@@ -61,7 +67,6 @@ public class MongoConnection {
     // TODO: I strongly suggest saving local copies of your BSON/JSON data.
     // Since this is a shared login, there is no guarantee that someone will not
     // overwrite your data. You can make your own free MongoDB Atlas instance as well.
-
 
   }
 
