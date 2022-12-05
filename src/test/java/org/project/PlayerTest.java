@@ -38,10 +38,10 @@ class PlayerTest {
 
   @Test
   void testMoveRight() {
-    assertEquals(new PVector(window.width / 2f, window.height / 2f), player.getPosition());
+    assertEquals(new PVector(window.width / 2f, window.height / 5f), player.getPosition());
     player.setDirection(0);
     player.move();
-    assertEquals(new PVector(window.width / 2f + 1.5f, window.height / 2f), player.getPosition());
+    assertEquals(new PVector(window.width / 2f + 1.5f, window.height / 5f), player.getPosition());
   }
 
   @Test
@@ -56,10 +56,10 @@ class PlayerTest {
 
   @Test
   void testMoveLeft() {
-    assertEquals(new PVector(window.width / 2f, window.height / 2f), player.getPosition());
+    assertEquals(new PVector(window.width / 2f, window.height / 5f), player.getPosition());
     player.setDirection(1);
     player.move();
-    assertEquals(new PVector(window.width / 2f - 1.5f, window.height / 2f), player.getPosition());
+    assertEquals(new PVector(window.width / 2f - 1.5f, window.height / 5f), player.getPosition());
   }
 
   @Test
