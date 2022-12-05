@@ -24,7 +24,7 @@ public class Player extends AbstractObservable {
    */
   private Player(Window window) {
     this.window = window;
-    position = new PVector(window.width / 2f, window.height / 2f);
+    position = new PVector(window.width / 2f, window.height / 5f);
     direction = new PVector(0f, 0f).normalize();
     velocity = 1f;
     observers = new ArrayList<>();

@@ -19,7 +19,6 @@ public class Cloud extends AbstractObserver {
   private float displacement;
   private boolean bounce;
   private boolean exited;
-  private PVector imagePosition;
 
   /**
    * Constructor for Cloud object. Width, height, and positions are randomized.
@@ -39,7 +38,6 @@ public class Cloud extends AbstractObserver {
     this.direction = newVector;
     this.direction.x *= this.speedMultiplier;
     cloudSprite = window.loadImage("images/cloud.png");
-    this.imagePosition = this.position;
   }
 
   /**
@@ -57,7 +55,7 @@ public class Cloud extends AbstractObserver {
       }
     }
     window.image(cloudSprite,
-        imagePosition.x - width / 2, imagePosition.y - height / 2, width, height);
+        position.x - width / 2, position.y - height / 2, width, height);
   }
 
   /**
@@ -79,6 +77,14 @@ public class Cloud extends AbstractObserver {
     rightBoundaryValue = this.position.x + width / 2;
     topBoundaryValue = this.position.y - height / 2;
     bottomBoundaryValue = this.position.y + height / 2;
+  }
+
+  /**
+   * sets the X-position of the cloud object.
+   * @param xPosition represents a horizontal coordinate
+   */
+  public void setX(float xPosition) {
+    this.position.x = xPosition;
   }
 
   /**

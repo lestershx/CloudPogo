@@ -22,7 +22,6 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -152,31 +151,43 @@ public final class SubscriberHelpers {
   }
 
   /**
-   * A Subscriber that prints the json version of each document
+   * A Subscriber that parses json version of each document and puts the data into a data structure.
    */
-  public static class PrintDocumentSubscriber extends OperationSubscriber<Document> {
+  public static class ParseDocumentSubscriber extends OperationSubscriber<Document> {
 
     Window window;
 
-    public PrintDocumentSubscriber (Window win) {
+    /**
+     * Constructor for the ParseDocumentSubscriber
+     * @param win the PApplet window that contains the object
+     */
+    public ParseDocumentSubscriber(Window win) {
       window = win;
     }
 
+    /**
+     * processes the document object retrieved from the database.
+     * @param document the element signaled
+     */
     @Override
     public void onNext(final Document document) {
       super.onNext(document);
-//      System.out.println(document.toJson());
+      //turns the document to a JSON string
       String results = document.toJson();
-
+      //splits the string and adds each line into an  array
       String[] newStringArr = results.split("\\D+[0-9a-z]+\\D+\"gameScore\": \"");
 
+      //iterates through each line
       for(int i = 0; i < newStringArr.length; i++) {
+        //trims the line and removes non-numeric characters
         newStringArr[i] = newStringArr[i].replaceAll("[\\D\\n]+", "");
         if(newStringArr[i].length() > 0) {
           Integer newInt = Integer.parseInt(newStringArr[i]);
+          //adds the data into the scorelist in the window object
           window.addScoreToList(newInt);
         }
       }
+      //sorts the scoreList in window
       window.sortScoreList();
     }
   }
