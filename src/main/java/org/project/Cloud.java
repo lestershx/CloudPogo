@@ -14,7 +14,7 @@ import processing.core.PVector;
 public class Cloud extends AbstractObserver {
   protected float width;
   protected float height;
-//  protected final PImage cloudSprite;
+  protected final PImage cloudSprite;
   private float speedMultiplier;
   private float displacement;
   private boolean bounce;
@@ -37,7 +37,7 @@ public class Cloud extends AbstractObserver {
     newVector.mult(speedMultiplier);
     this.direction = newVector;
     this.direction.x *= this.speedMultiplier;
-//    cloudSprite = window.loadImage("images/cloud.png");
+    cloudSprite = window.loadImage("images/cloud.png");
   }
 
   /**
@@ -54,8 +54,8 @@ public class Cloud extends AbstractObserver {
         this.bounce = false;
       }
     }
-//    window.image(cloudSprite,
-//        position.x - width / 2, position.y - height / 2, width, height);
+    window.image(cloudSprite,
+        position.x - width / 2, position.y - height / 2, width, height);
   }
 
   /**
