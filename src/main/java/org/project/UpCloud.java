@@ -44,4 +44,14 @@ public class UpCloud extends Cloud {
     checkHeight();
     super.move();
   }
+
+  /**
+   * Getter method for the UpCloud's starting height.
+   * Used mainly for testing purposes.
+   *
+   * @return cloud's starting (spawn) height as a float
+   */
+  public float getStartingHeight() {
+    return startingHeight;
+  }
 }

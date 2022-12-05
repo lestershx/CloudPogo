@@ -10,6 +10,8 @@ the sky. Clouds will vary from stationary clouds to turbulent clouds that float 
 and try to beat the scores on the leaderboard! 
 ## Controls:
 
+Wait for the first cloud to come into range and press any directional key to start the game.
+
 LEFT KEY [⇦]: Makes Pogo go left
 
 RIGHT KEY [⇨]: Makes Pogo go right

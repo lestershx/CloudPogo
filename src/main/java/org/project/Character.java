@@ -21,12 +21,32 @@ public abstract class Character implements Drawable {
   protected float bottomBoundaryValue;
 
   /**
+   * Setter method for AbstractCharacter's current position.
+   * Used in testing.
+   *
+   * @param position position as PVector
+   */
+  public void setPosition(PVector position) {
+    this.position = position;
+  }
+
+  /**
    * Getter method for AbstractCharacter's current position.
    *
    * @return current position as PVector.
    */
   public PVector getPosition() {
     return position;
+  }
+
+  /**
+   * Setter method for AbstractCharacter's current direction.
+   * Used in testing.
+   *
+   * @param direction direction as PVector
+   */
+  public void setDirection(PVector direction) {
+    this.direction = direction;
   }
 
   /**
