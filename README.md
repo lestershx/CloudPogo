@@ -8,6 +8,11 @@ course at BCIT.
 The object of the game is to control Pogo, a wandering star to keep bouncing on clouds to prevent it from falling from
 the sky. Clouds will vary from stationary clouds to turbulent clouds that float up and down. Survive as long as possible
 and try to beat the scores on the leaderboard! 
+
+## Installation:
+
+To play, either download the repository and run the app through main/java/org.project.Window class, or download the CloudPogo.jar file separately that is provided in the repository. 
+
 ## Controls:
 
 Wait for the first cloud to come into range and press any directional key to start the game.
