@@ -55,9 +55,9 @@ public class MongoConnection {
    * @param score the gamescore to be uploaded to the database
    */
   void connect(int score) {
-    Dotenv dotenv = Dotenv.load();
-    String uri = dotenv.get("MONGO_URI");
-    ConnectionString connectionString = new ConnectionString(uri);
+//    Dotenv dotenv = Dotenv.load();
+//    String uri = dotenv.get("MONGO_URI");
+    ConnectionString connectionString = new ConnectionString("mongodb+srv://lestershunnn_db_user:h0CECHG8GTiGXzrs@cluster0.eg7evd4.mongodb.net/?appName=Cluster0");
     // settings for connecting to MongoDB
     MongoClientSettings settings = MongoClientSettings.builder()
         .applyConnectionString(connectionString)

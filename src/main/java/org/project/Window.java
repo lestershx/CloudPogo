@@ -137,7 +137,7 @@ public class Window extends PApplet {
       }
       textFont(font1, 26);
       fill(255);
-      text("CLOUD HOPPER", width / 2 - 270f, height / 5);
+      text("CLOUD POGO", width / 2 - 270f, height / 5);
       textFont(font1, 18);
       text("By Lester and Buck", width / 2 - 270f, height / 5 + 25f);
       text("Dont hit the ground,", width / 2 - 270f, height / 3);
