@@ -10,6 +10,7 @@ import com.mongodb.reactivestreams.client.MongoClients;
 import com.mongodb.reactivestreams.client.MongoCollection;
 import com.mongodb.reactivestreams.client.MongoDatabase;
 import org.bson.Document;
+import io.github.cdimascio.dotenv.Dotenv;
 
 //import static com.mongodb.client.model.Filters.eq;
 
@@ -54,9 +55,9 @@ public class MongoConnection {
    * @param score the gamescore to be uploaded to the database
    */
   void connect(int score) {
-    // you can use these credentials until there are any overwrite conflicts, then talk to Paul
-    ConnectionString connectionString = new ConnectionString("mongodb+srv://student:comp2522fall"
-        + "2022student@bcit-comp2522-fall-2022.lf8mknm.mongodb.net/?retryWrites=true&w=majority");
+    Dotenv dotenv = Dotenv.load();
+    String uri = dotenv.get("MONGO_URI");
+    ConnectionString connectionString = new ConnectionString(uri);
     // settings for connecting to MongoDB
     MongoClientSettings settings = MongoClientSettings.builder()
         .applyConnectionString(connectionString)
@@ -67,10 +68,10 @@ public class MongoConnection {
     // connect to MongoDB
     MongoClient mongoClient = MongoClients.create(settings);
     // Use this database unless there are overwrite conflicts
-    MongoDatabase database = mongoClient.getDatabase("comp2522fall2022");
+    MongoDatabase database = mongoClient.getDatabase("cloudhopper");
 
     // Replace "test" with your group name
-    MongoCollection<Document> collection = database.getCollection("CloudHopperGame");
+    MongoCollection<Document> collection = database.getCollection("scores");
 
     // Create a document
     Document doc = new Document("gameScore", "" + score);
@@ -84,10 +85,6 @@ public class MongoConnection {
     collection.find()
         // subscribe takes a class that defines the callback
         .subscribe(new SubscriberHelpers.ParseDocumentSubscriber(this.window));
-
-    // TODO: I strongly suggest saving local copies of your BSON/JSON data.
-    // Since this is a shared login, there is no guarantee that someone will not
-    // overwrite your data. You can make your own free MongoDB Atlas instance as well.
   }
 
 

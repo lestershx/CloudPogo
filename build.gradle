@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
     implementation 'org.mongodb:mongodb-driver-reactivestreams:4.8.0'
     implementation fileTree(dir: 'library', include: ['*.jar'])
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
@@ -18,4 +19,15 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.project.Window' // Your main class
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
